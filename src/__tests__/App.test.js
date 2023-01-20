@@ -1,5 +1,4 @@
 import React from "react";
-import "whatwg-fetch";
 import {
   fireEvent,
   render,
@@ -7,7 +6,7 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { server } from "../mocks/server";
+import { server } from "./mocks/server";
 
 import App from "../components/App";
 
@@ -60,8 +59,6 @@ test("creates a new question when the form is submitted", async () => {
 test("deletes the question when the delete button is clicked", async () => {
   const { rerender } = render(<App />);
 
-  fireEvent.click(screen.queryByText(/View Questions/));
-
   await screen.findByText(/lorem testum 1/g);
 
   fireEvent.click(screen.queryAllByText("Delete Question")[0]);
@@ -77,8 +74,6 @@ test("deletes the question when the delete button is clicked", async () => {
 
 test("updates the answer when the dropdown is changed", async () => {
   const { rerender } = render(<App />);
-
-  fireEvent.click(screen.queryByText(/View Questions/));
 
   await screen.findByText(/lorem testum 2/g);
 
